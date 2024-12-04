@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    networks:
+      - taskmanager-net
+
+  api:
+    build: ./api
+    ports:
+      - "3001:3001"
+    networks:
+      - taskmanager-net
+    volumes:
+      - ./api/tasks.db:/app/tasks.db
+
+networks:
+  taskmanager-net:
+    driver: bridge
